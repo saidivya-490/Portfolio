@@ -232,6 +232,47 @@
             <li><strong>Hardening:</strong> better alerting, reduced noise, clearer escalation path.</li>
           </ul>
         </article>
+
+        <article class="card">
+  <h3>Database: Deadlocks / blocking causing API timeouts (SQL Server / Oracle)</h3>
+  <ul class="bullets">
+    <li><strong>Signal:</strong> Sudden increase in API latency + timeout errors; elevated DB CPU/locks during peak hours.</li>
+    <li><strong>Triage:</strong> Reduced blast radius (temporary throttling / feature flag / queueing) and stabilized user-facing flows.</li>
+    <li><strong>Diagnosis:</strong>
+      Identified blocking chains and deadlock patterns using DB monitoring (locks, wait stats), correlated with Splunk traces to isolate the exact API endpoints and queries involved.
+    </li>
+    <li><strong>Decision:</strong>
+      Prioritized a safe fix path: reduce lock duration first (query rewrite + indexing), then adjust transaction scope and isolation where needed.
+    </li>
+    <li><strong>Fix:</strong>
+      Refactored the stored procedure/query to avoid wide scans, added targeted indexes, reduced transaction scope, and introduced idempotent retry for safe transient failures.
+    </li>
+    <li><strong>Prevention:</strong>
+      Added DB guardrails (timeouts, alert thresholds), created a runbook for lock escalation, and added dashboards tracking waits/latency/error rates.
+    </li>
+  </ul>
+</article>
+
+        <article class="card">
+  <h3>Data integrity: Preventing duplicate/incorrect records in distributed workflows</h3>
+  <ul class="bullets">
+    <li><strong>Signal:</strong> Intermittent duplicates / mismatched counts reported by business; issues spiked during retries or partial outages.</li>
+    <li><strong>Triage:</strong> Identified impacted time window, paused risky replays, and used reconciliation queries to quantify impact.</li>
+    <li><strong>Diagnosis:</strong>
+      Root cause was a non-idempotent write path + retry behavior during transient failures (network/timeout), leading to duplicate inserts.
+    </li>
+    <li><strong>Decision:</strong>
+      Implemented an idempotency strategy to make retries safe without slowing normal throughput.
+    </li>
+    <li><strong>Fix:</strong>
+      Added a deterministic idempotency key, enforced uniqueness at the DB level, and updated the API/service layer to use upsert/merge patterns where appropriate.
+    </li>
+    <li><strong>Prevention:</strong>
+      Added reconciliation job/runbook, alerting for anomaly detection (spikes in duplicates), and expanded test coverage for retry + failure scenarios.
+    </li>
+  </ul>
+</article>
+
       </div>
     </div>
   </section>
