@@ -1,0 +1,32 @@
+{
+  "projects": [
+    {
+      "title": "Food Truck Trackers — iOS Application",
+      "dates": "Mar 2016 – May 2016 (National University)",
+      "description": "Designed and built an iOS application for business owners and customers to improve communication, service updates, and smoother business operations.",
+      "tech": ["Swift", "Xcode", "Firebase"],
+      "link": ""
+    },
+    {
+      "title": "Automatic Database Schema Generation Using GUI",
+      "dates": "Jun 2014 – Dec 2014 (KL University)",
+      "description": "Built a system that allows developers to create database schema through a GUI so they can focus on design rather than manual scripting. Implemented with a 3-tier architecture and Oracle backend.",
+      "tech": ["C#", "Oracle 10g", "SQL", "AngularJS", "HTML", "JavaScript", "CSS", "Apache Tomcat"],
+      "link": ""
+    },
+    {
+      "title": "Corruption Control through Budget Maintenance",
+      "dates": "Aug 2012 – Jan 2013 (KL University)",
+      "description": "Built a web application to track government fund release and utilization, improving transparency by showing how funds were used and by whom.",
+      "tech": ["Java", "MySQL", "HTML", "CSS", "JavaScript"],
+      "link": ""
+    },
+    {
+      "title": "Law and Order Automation",
+      "dates": "Jan 2011 – Aug 2011 (KL University)",
+      "description": "Web application for next-generation police reporting and intelligence workflows to reduce manual effort, improve incident processing, and help agencies allocate resources effectively.",
+      "tech": ["Struts", "J2EE", "Web Services", "DB2", "UML", "XML", "HTML", "JavaScript", "CSS"],
+      "link": ""
+    }
+  ]
+}
