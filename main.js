@@ -1,7 +1,7 @@
 const LINKS = {
   resumePdf: "resume.pdf", // upload resume.pdf into repo root
   linkedin: "https://www.linkedin.com/in/sai-k-853685143/",
-  email: "Sai.divya490@gmail.com"
+  email: "Saidivyak280@gmail.com"
 };
 
 document.getElementById("year").textContent = new Date().getFullYear();
