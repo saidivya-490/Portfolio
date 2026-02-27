@@ -167,6 +167,7 @@ h1{font-size:44px;line-height:1.1;margin:0 0 12px}
   .card--hero{position:relative; top:auto}
   .grid-2{grid-template-columns:1fr}
   .grid-3{grid-template-columns:1fr}
+  .grid-2 .card { height: 100%; }
   .nav{display:none}
   .hamburger{display:inline-flex}
   h1{font-size:38px}
