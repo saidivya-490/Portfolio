@@ -51,6 +51,7 @@
           <span class="chip">Docker • Azure DevOps CI/CD</span>
           <span class="chip">Splunk • AppDynamics • Dynatrace</span>
           <span class="chip">SQL Server • Oracle • PL/SQL</span>
+          <span class="chip"> CSS • Angular • Html • CSS</span>
         </div>
       </div>
 
@@ -60,6 +61,7 @@
           <li><strong>Focus:</strong> Senior .NET Full-Stack + L2/L3 Production</li>
           <li><strong>Ops:</strong> 24x7 on-call, SEV-1/SEV-2, RCA, ITIL</li>
           <li><strong>Monitoring:</strong> Splunk + APM (AppDynamics/Dynatrace)</li>
+          <li><strong>UI technologies:</strong> CSS, Angular, Html, CSS and Delivered modern enterprise UI using ASP.NET MVC & Angular improving usability and workflow efficiency</li>
           <li><strong>Delivery:</strong> Docker, Azure DevOps pipelines, safe releases</li>
         </ul>
         <div class="divider"></div>
@@ -78,7 +80,7 @@
         <h2>About</h2>
         <p class="muted">
           I build backend services and full-stack apps with strong ownership in production. I’m comfortable driving
-          architecture decisions, shipping features, and handling high-severity incidents end-to-end.
+          architecture decisions, shipping features, and handling high-severity incidents end-to-end and migrated legacy applications into latest versions.
         </p>
       </div>
 
@@ -100,12 +102,50 @@
             <li>Clear communication in incidents and stakeholder-facing updates.</li>
             <li>Pragmatic engineering: stability now + permanent fix soon.</li>
             <li>Documentation for scale: runbooks, deployment guides, KT material.</li>
+            <li>Development: Built modular components to enable reuse across features,Designed services that are easy to extend without breaking existing logic</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
+  <section id="development" class="section section--alt">
+  <div class="container">
+    <div class="section__head">
+      <h2>Development Ownership</h2>
+      <p class="muted">How I drive feature development in scalable enterprise applications.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <h3>1) Design</h3>
+        <p class="muted">
+          Translate business requirements into technical design, define APIs, and structure modular components for scalability.
+        </p>
+      </div>
+      <div class="card">
+        <h3>2) Build</h3>
+        <p class="muted">
+          Develop clean services and integrations across UI, API, and data layers with strong separation of concerns.
+        </p>
+      </div>
+      <div class="card">
+        <h3>3) Optimize</h3>
+        <p class="muted">
+          Enhance performance through refactoring, query tuning, and reusable service patterns for future extensibility.
+        </p>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Development practices I’ve applied:</strong>
+      ASP.NET Core service design, Angular-based UI integration, REST API development,
+      Entity Framework optimization, SQL performance tuning, Microservices architecture,
+      Azure DevOps pipelines, Docker-based deployment readiness.
+    </div>
+  </div>
+</section>
+  
   <section id="production" class="section section--alt">
     <div class="container">
       <div class="section__head">
@@ -215,21 +255,24 @@
         <article class="card">
           <h3>SEV-1: Merchant-impacting incident (end-to-end ownership)</h3>
           <ul class="bullets">
-            <li><strong>Signal:</strong> spike in errors + monitoring alerts.</li>
-            <li><strong>Triage:</strong> stabilize service and communicate impact & timeline.</li>
-            <li><strong>Diagnosis:</strong> Splunk transaction tracing + APM call graphs + DB checks.</li>
-            <li><strong>Fix:</strong> safe patch/DB correction with controlled rollout and validation.</li>
-            <li><strong>Prevention:</strong> tuned alerts, dashboards, and runbook updates.</li>
+            <li><strong>Signal:</strong> Received multiple SEV-1 alerts impacting Payment API, Authentication, and Reporting services within a short time window.</li>
+            <li><strong>Triage:</strong> Identified a potential shared dependency using Dynatrace Smartscape instead of treating them as isolated failures.</li>
+            <li><strong>Diagnosis:</strong> Correlated Splunk logs and AutoSys job activity to trace the issue to a recently modified archival job causing high DB wait times and connection pool exhaustion.</li>
+            <li><strong>Fix:</strong> Stabilized services by pausing the archival job and temporarily adjusting DB connection pools.</li>
+            <li><strong>Prevention:</strong> Redesigned the archival process to run in smaller batches and implemented database resource governance to avoid future production impact.</li>
           </ul>
         </article>
 
         <article class="card">
-          <h3>Batch operations: Autosys job failures within SLA</h3>
+          <h3>Microservices Reporting Optimization Using SQL Materialized View</h3>
           <ul class="bullets">
-            <li><strong>Problem:</strong> job failures impacting downstream workflows.</li>
-            <li><strong>Approach:</strong> correlate logs + dependency health + DB behavior.</li>
-            <li><strong>Resolution:</strong> fix root cause (timeouts/retries/query tuning) and verify recovery.</li>
-            <li><strong>Hardening:</strong> better alerting, reduced noise, clearer escalation path.</li>
+            <li><strong>Signal:</strong> job failures impacting downstream workflows.Business required faster reporting insights from high-volume transactional data across multiple services.</li>
+            <li><strong>Triage:</strong> Analyzed reporting latency and collaborated with stakeholders to define performance targets for near real-time insights.</li>
+            <li><strong>Diagnosis:</strong> Identified that reporting APIs were aggregating large transactional data in real-time across microservices, causing heavy SQL joins and slower response times.</li>
+            <li><strong>Fix:</strong> better alerting, reduced noise, clearer escalation path.Designed a reporting microservice backed by a SQL Server materialized view (indexed view) to pre-aggregate critical data. Updated .NET Core APIs to fetch from the optimized view instead of running runtime aggregations.</li>
+             <li><strong>Prevention:</strong> Established a refresh strategy and monitoring for the materialized view and defined architectural guidelines to use pre-aggregated data for read-heavy workloads.
+</li>
+            <li><strong>👉 Result:</strong> Reduced report generation time by ~60% and minimized database load during peak usage.</li>
           </ul>
         </article>
 
@@ -250,26 +293,24 @@
     <li><strong>Prevention:</strong>
       Added DB guardrails (timeouts, alert thresholds), created a runbook for lock escalation, and added dashboards tracking waits/latency/error rates.
     </li>
-  </ul>
+      </ul>
 </article>
 
         <article class="card">
-  <h3>Data integrity: Preventing duplicate/incorrect records in distributed workflows</h3>
+  <h3>Role-Based Monitoring Dashboard</h3>
   <ul class="bullets">
-    <li><strong>Signal:</strong> Intermittent duplicates / mismatched counts reported by business; issues spiked during retries or partial outages.</li>
-    <li><strong>Triage:</strong> Identified impacted time window, paused risky replays, and used reconciliation queries to quantify impact.</li>
+    <li><strong>Signal:</strong> Business needed a faster and role-based monitoring dashboard to improve visibility into credit activities.</li>
+    <li><strong>Triage:</strong> Worked with BA and product teams to define user roles, data needs, and performance expectations. Designed API contracts before UI build.</li>
     <li><strong>Diagnosis:</strong>
-      Root cause was a non-idempotent write path + retry behavior during transient failures (network/timeout), leading to duplicate inserts.
-    </li>
-    <li><strong>Decision:</strong>
-      Implemented an idempotency strategy to make retries safe without slowing normal throughput.
+      Identified gaps in current APIs including over-fetching of data and missing SQL indexing affecting filter performance.
     </li>
     <li><strong>Fix:</strong>
-      Added a deterministic idempotency key, enforced uniqueness at the DB level, and updated the API/service layer to use upsert/merge patterns where appropriate.
+     Built optimized .NET Core APIs with async EF queries and implemented Angular UI with reusable components and server-side pagination.
     </li>
     <li><strong>Prevention:</strong>
-      Added reconciliation job/runbook, alerting for anomaly detection (spikes in duplicates), and expanded test coverage for retry + failure scenarios.
+      Introduced API versioning and performance baselines to ensure future enhancements maintain scalability.
     </li>
+    <li><strong>👉 Result:</strong> Improved dashboard load time by ~45% and enhanced user decision speed.</li>
   </ul>
 </article>
 
