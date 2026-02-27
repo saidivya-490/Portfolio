@@ -287,29 +287,34 @@
       </div>
 
       <div class="grid-2">
-        <article class="card">
-          <h3>SEV-1: Merchant-impacting incident (end-to-end ownership)</h3>
-          <ul class="bullets">
-            <li><strong>Signal:</strong> Received multiple SEV-1 alerts impacting Payment API, Authentication, and Reporting services within a short time window.</li>
-            <li><strong>Triage:</strong> Identified a potential shared dependency using Dynatrace Smartscape instead of treating them as isolated failures.</li>
-            <li><strong>Diagnosis:</strong> Correlated Splunk logs and AutoSys job activity to trace the issue to a recently modified archival job causing high DB wait times and connection pool exhaustion.</li>
-            <li><strong>Fix:</strong> Stabilized services by pausing the archival job and temporarily adjusting DB connection pools.</li>
-            <li><strong>Prevention:</strong> Redesigned the archival process to run in smaller batches and implemented database resource governance to avoid future production impact.</li>
-          </ul>
-        </article>
+  <article class="card">
+    <h3>SEV-1: Merchant-impacting incident (end-to-end ownership)</h3>
+    <ul class="bullets">
+      <li><strong>Signal:</strong> Multiple SEV-1 alerts were triggered across Payment, Authentication, and Reporting services.</li>
+      <li><strong>Triage:</strong> Dynatrace Smartscape analysis showed all impacted services were connected to the same database.</li>
+      <li><strong>Diagnosis:</strong> Splunk logs revealed a recently modified archival job was creating heavy DB load and exhausting connection pools.</li>
+      <li><strong>Fix:</strong> Paused the archival job and adjusted DB connection limits to stabilize services.</li>
+      <li><strong>Prevention:</strong> Redesigned the archival process to run in smaller batches and implemented DB resource controls.</li>
+    </ul>
+    <p class="muted">
+      👉 Result: Services were restored quickly and future database impact was prevented.
+    </p>
+  </article>
+</div>
 
-        <article class="card">
-          <h3>Microservices Reporting Optimization Using SQL Materialized View</h3>
-          <ul class="bullets">
-            <li><strong>Signal:</strong> job failures impacting downstream workflows.Business required faster reporting insights from high-volume transactional data across multiple services.</li>
-            <li><strong>Triage:</strong> Analyzed reporting latency and collaborated with stakeholders to define performance targets for near real-time insights.</li>
-            <li><strong>Diagnosis:</strong> Identified that reporting APIs were aggregating large transactional data in real-time across microservices, causing heavy SQL joins and slower response times.</li>
-            <li><strong>Fix:</strong> better alerting, reduced noise, clearer escalation path.Designed a reporting microservice backed by a SQL Server materialized view (indexed view) to pre-aggregate critical data. Updated .NET Core APIs to fetch from the optimized view instead of running runtime aggregations.</li>
-             <li><strong>Prevention:</strong> Established a refresh strategy and monitoring for the materialized view and defined architectural guidelines to use pre-aggregated data for read-heavy workloads.
-</li>
-            <li><strong>👉 Result:</strong> Reduced report generation time by ~60% and minimized database load during peak usage.</li>
-          </ul>
-        </article>
+       <article class="card">
+  <h3>Microservices Reporting Optimization Using SQL Materialized View</h3>
+  <ul class="bullets">
+    <li><strong>Signal:</strong> Reporting was slow due to real-time aggregation of large transactional data.</li>
+    <li><strong>Triage:</strong> Analyzed latency and aligned with stakeholders on performance targets.</li>
+    <li><strong>Diagnosis:</strong> Identified heavy SQL joins occurring across microservices.</li>
+    <li><strong>Fix:</strong> Built a reporting microservice using a SQL Server indexed (materialized) view.</li>
+    <li><strong>Prevention:</strong> Added a refresh strategy and architectural guidelines for read-heavy workloads.</li>
+  </ul>
+  <p class="muted">
+    👉 Result: Report generation time reduced by ~60% and database load decreased.
+  </p>
+</article>
 
         <article class="card">
   <h3>Database: Deadlocks / blocking causing API timeouts (SQL Server / Oracle)</h3>
@@ -334,19 +339,15 @@
         <article class="card">
   <h3>Role-Based Monitoring Dashboard</h3>
   <ul class="bullets">
-    <li><strong>Signal:</strong> Business needed a faster and role-based monitoring dashboard to improve visibility into credit activities.</li>
-    <li><strong>Triage:</strong> Worked with BA and product teams to define user roles, data needs, and performance expectations. Designed API contracts before UI build.</li>
-    <li><strong>Diagnosis:</strong>
-      Identified gaps in current APIs including over-fetching of data and missing SQL indexing affecting filter performance.
-    </li>
-    <li><strong>Fix:</strong>
-     Built optimized .NET Core APIs with async EF queries and implemented Angular UI with reusable components and server-side pagination.
-    </li>
-    <li><strong>Prevention:</strong>
-      Introduced API versioning and performance baselines to ensure future enhancements maintain scalability.
-    </li>
-    <li><strong>👉 Result:</strong> Improved dashboard load time by ~45% and enhanced user decision speed.</li>
+    <li><strong>Signal:</strong> Business needed a faster, role-based dashboard for better credit visibility.</li>
+    <li><strong>Triage:</strong> Worked with BA and product teams to define role-based data needs and performance expectations.</li>
+    <li><strong>Diagnosis:</strong> Identified APIs were over-fetching data and missing SQL indexes were slowing filter performance.</li>
+    <li><strong>Fix:</strong> Built optimized .NET Core APIs and enhanced Angular UI with server-side pagination.</li>
+    <li><strong>Prevention:</strong> Introduced API versioning and performance baselines.</li>
   </ul>
+  <p class="muted">
+    👉 Result: Dashboard load time improved by ~45%.
+  </p>
 </article>
 
       </div>
