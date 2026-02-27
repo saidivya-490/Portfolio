@@ -279,81 +279,67 @@
     </div>
   </section>
 
-  <section id="case-studies" class="section section--alt">
-    <div class="container">
-      <div class="section__head">
-        <h2>Senior Case Studies</h2>
-        <p class="muted">Written in the format hiring managers look for: signal → diagnosis → decision → fix → prevention.</p>
-      </div>
-
-      <div class="grid-2">
-  <article class="card">
-    <h3>SEV-1: Merchant-impacting incident (end-to-end ownership)</h3>
-    <ul class="bullets">
-      <li><strong>Signal:</strong> Multiple SEV-1 alerts were triggered across Payment, Authentication, and Reporting services.</li>
-      <li><strong>Triage:</strong> Dynatrace Smartscape analysis showed all impacted services were connected to the same database.</li>
-      <li><strong>Diagnosis:</strong> Splunk logs revealed a recently modified archival job was creating heavy DB load and exhausting connection pools.</li>
-      <li><strong>Fix:</strong> Paused the archival job and adjusted DB connection limits to stabilize services.</li>
-      <li><strong>Prevention:</strong> Redesigned the archival process to run in smaller batches and implemented DB resource controls.</li>
-    </ul>
-    <p class="muted">
-      👉 Result: Services were restored quickly and future database impact was prevented.
-    </p>
-  </article>
-</div>
-
-       <article class="card">
-  <h3>Microservices Reporting Optimization Using SQL Materialized View</h3>
-  <ul class="bullets">
-    <li><strong>Signal:</strong> Reporting was slow due to real-time aggregation of large transactional data.</li>
-    <li><strong>Triage:</strong> Analyzed latency and aligned with stakeholders on performance targets.</li>
-    <li><strong>Diagnosis:</strong> Identified heavy SQL joins occurring across microservices.</li>
-    <li><strong>Fix:</strong> Built a reporting microservice using a SQL Server indexed (materialized) view.</li>
-    <li><strong>Prevention:</strong> Added a refresh strategy and architectural guidelines for read-heavy workloads.</li>
-  </ul>
-  <p class="muted">
-    👉 Result: Report generation time reduced by ~60% and database load decreased.
-  </p>
-</article>
-
-        <article class="card">
-  <h3>Database: Deadlocks / blocking causing API timeouts (SQL Server / Oracle)</h3>
-  <ul class="bullets">
-    <li><strong>Signal:</strong> Sudden increase in API latency + timeout errors; elevated DB CPU/locks during peak hours.</li>
-    <li><strong>Triage:</strong> Reduced blast radius (temporary throttling / feature flag / queueing) and stabilized user-facing flows.</li>
-    <li><strong>Diagnosis:</strong>
-      Identified blocking chains and deadlock patterns using DB monitoring (locks, wait stats), correlated with Splunk traces to isolate the exact API endpoints and queries involved.
-    </li>
-    <li><strong>Decision:</strong>
-      Prioritized a safe fix path: reduce lock duration first (query rewrite + indexing), then adjust transaction scope and isolation where needed.
-    </li>
-    <li><strong>Fix:</strong>
-      Refactored the stored procedure/query to avoid wide scans, added targeted indexes, reduced transaction scope, and introduced idempotent retry for safe transient failures.
-    </li>
-    <li><strong>Prevention:</strong>
-      Added DB guardrails (timeouts, alert thresholds), created a runbook for lock escalation, and added dashboards tracking waits/latency/error rates.
-    </li>
-      </ul>
-</article>
-
-        <article class="card">
-  <h3>Role-Based Monitoring Dashboard</h3>
-  <ul class="bullets">
-    <li><strong>Signal:</strong> Business needed a faster, role-based dashboard for better credit visibility.</li>
-    <li><strong>Triage:</strong> Worked with BA and product teams to define role-based data needs and performance expectations.</li>
-    <li><strong>Diagnosis:</strong> Identified APIs were over-fetching data and missing SQL indexes were slowing filter performance.</li>
-    <li><strong>Fix:</strong> Built optimized .NET Core APIs and enhanced Angular UI with server-side pagination.</li>
-    <li><strong>Prevention:</strong> Introduced API versioning and performance baselines.</li>
-  </ul>
-  <p class="muted">
-    👉 Result: Dashboard load time improved by ~45%.
-  </p>
-</article>
-
-      </div>
+ <section id="case-studies" class="section">
+  <div class="container">
+    <div class="section__head">
+      <h2>Senior Case Studies</h2>
+      <p class="muted">Written in the format hiring managers look for: signal → triage → diagnosis → fix → prevention.</p>
     </div>
-  </section>
 
+    <div class="grid-2">
+      <!-- 1 -->
+      <article class="card">
+        <h3>SEV-1: Merchant-impacting incident (end-to-end ownership)</h3>
+        <ul class="bullets">
+          <li><strong>Signal:</strong> Multiple SEV-1 alerts were triggered across Payment, Authentication, and Reporting services.</li>
+          <li><strong>Triage:</strong> Dynatrace Smartscape analysis showed all impacted services were connected to the same database.</li>
+          <li><strong>Diagnosis:</strong> Splunk logs revealed a recently modified archival job was creating heavy DB load and exhausting connection pools.</li>
+          <li><strong>Fix:</strong> Paused the archival job and adjusted DB connection limits to stabilize services.</li>
+          <li><strong>Prevention:</strong> Redesigned the archival process to run in smaller batches and implemented DB resource controls.</li>
+        </ul>
+        <p class="muted">👉 Result: Services were restored quickly and future database impact was prevented.</p>
+      </article>
+
+      <!-- 2 -->
+      <article class="card">
+        <h3>Role-Based Monitoring Dashboard</h3>
+        <ul class="bullets">
+          <li><strong>Signal:</strong> Business needed a faster, role-based dashboard for better credit visibility.</li>
+          <li><strong>Triage:</strong> Worked with BA and product teams to define role-based data needs and performance expectations.</li>
+          <li><strong>Diagnosis:</strong> Identified APIs were over-fetching data and missing SQL indexes were slowing filter performance.</li>
+          <li><strong>Fix:</strong> Built optimized .NET Core APIs and enhanced Angular UI with server-side pagination.</li>
+          <li><strong>Prevention:</strong> Introduced API versioning and performance baselines.</li>
+        </ul>
+        <p class="muted">👉 Result: Dashboard load time improved by ~45%.</p>
+      </article>
+
+      <!-- 3 -->
+      <article class="card">
+        <h3>Microservices Reporting Optimization Using SQL Materialized View</h3>
+        <ul class="bullets">
+          <li><strong>Signal:</strong> Reporting was slow due to real-time aggregation of large transactional data.</li>
+          <li><strong>Triage:</strong> Analyzed latency and aligned with stakeholders on performance targets.</li>
+          <li><strong>Diagnosis:</strong> Identified heavy SQL joins occurring across microservices.</li>
+          <li><strong>Fix:</strong> Built a reporting microservice using a SQL Server indexed (materialized) view.</li>
+          <li><strong>Prevention:</strong> Added a refresh strategy and architectural guidelines for read-heavy workloads.</li>
+        </ul>
+        <p class="muted">👉 Result: Report generation time reduced by ~60% and database load decreased.</p>
+      </article>
+
+      <!-- 4 -->
+      <article class="card">
+        <h3>Database: Deadlocks / blocking causing API timeouts (SQL Server / Oracle)</h3>
+        <ul class="bullets">
+          <li><strong>Signal:</strong> Sudden increase in API latency + timeout errors; elevated DB CPU/locks during peak hours.</li>
+          <li><strong>Triage:</strong> Reduced blast radius (temporary throttling / feature flag / queueing) and stabilized user-facing flows.</li>
+          <li><strong>Diagnosis:</strong> Identified blocking chains and deadlock patterns using DB monitoring and correlated Splunk traces to isolate queries/endpoints.</li>
+          <li><strong>Fix:</strong> Refactored queries/stored procedures, added targeted indexes, reduced transaction scope, and introduced safe retry for transient failures.</li>
+          <li><strong>Prevention:</strong> Added DB guardrails (timeouts/thresholds), dashboards for waits/latency, and a lock escalation runbook.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
   <section id="projects" class="section">
     <div class="container">
       <div class="section__head">
